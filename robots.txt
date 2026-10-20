@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.northeastdampproofers.co.uk/sitemap.xml
+Sitemap: https://northeastdampproofers.co.uk/sitemap.xml
