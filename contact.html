@@ -205,6 +205,7 @@ footer.site a:hover{color:#fff}
     <div class="pills"><span class="pill">Newcastle upon Tyne</span><span class="pill">Gateshead</span><span class="pill">Sunderland</span><span class="pill">Durham</span><span class="pill">South Shields</span><span class="pill">North Shields</span><span class="pill">Washington</span><span class="pill">Chester-le-Street</span><span class="pill">Houghton-le-Spring</span><span class="pill">Jarrow</span><span class="pill">Hebburn</span><span class="pill">Birtley</span></div>
   </div>
   <form id="contactForm">
+    <div style="position:absolute;left:-9999px" aria-hidden="true"><label>Leave this empty<input type="text" name="hp" tabindex="-1" autocomplete="off"></label></div>
     <div class="field"><label>Full Name <span class="req">*</span></label><input type="text" name="name" required></div>
     <div class="field"><label>Email Address <span class="req">*</span></label><input type="email" name="email" required></div>
     <div class="field"><label>Phone Number</label><input type="tel" name="phone"></div>
@@ -213,6 +214,7 @@ footer.site a:hover{color:#fff}
       <button type="submit" class="btn">Send Message &rarr;</button>
       <a class="btn btn--o" href="book.html">Request a Quote</a>
     </div>
+    <p id="contactStatus" class="note center" role="status" aria-live="polite" style="font-weight:600"></p>
   </form>
 </div></div>
 
@@ -267,10 +269,22 @@ document.querySelectorAll('.baslider').forEach(function(el){
 </body>
 </html>
 <script>
-document.getElementById('contactForm').addEventListener('submit', function(e){
+document.getElementById('contactForm').addEventListener('submit', async function(e){
   e.preventDefault();
-  const d = new FormData(this);
-  const body = `Name: ${d.get('name')}%0D%0AEmail: ${d.get('email')}%0D%0APhone: ${d.get('phone')}%0D%0AMessage: ${d.get('message')}`;
-  window.location.href = 'mailto:info@northeastdampproofers.co.uk?subject=' + encodeURIComponent('Website Contact Form') + '&body=' + body;
+  const form = this, status = document.getElementById('contactStatus'), btn = form.querySelector('button[type=submit]');
+  const label = btn.textContent;
+  const d = new FormData(form);
+  const payload = { kind: 'contact', name: d.get('name'), email: d.get('email'), phone: d.get('phone'), details: d.get('message'), hp: d.get('hp') };
+  btn.disabled = true; btn.textContent = 'Sending…'; status.style.color = ''; status.textContent = '';
+  try {
+    const r = await fetch('/api/enquiry', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    if (!r.ok) throw new Error('send failed');
+    form.reset();
+    status.style.color = '#1B7F3B';
+    status.textContent = 'Thanks — your message has been sent. We\'ll get back to you soon.';
+  } catch (err) {
+    status.style.color = '#B3261E';
+    status.textContent = 'Sorry, that didn\'t send. Please call 07446 522034 or email info@northeastdampproofers.co.uk and we\'ll pick it up directly.';
+  } finally { btn.disabled = false; btn.textContent = label; }
 });
 </script>

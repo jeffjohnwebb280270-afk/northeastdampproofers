@@ -197,6 +197,7 @@ footer.site a:hover{color:#fff}
 </div>
 <div class="band"><div class="wrap" style="max-width:640px">
   <form id="bookForm">
+    <div style="position:absolute;left:-9999px" aria-hidden="true"><label>Leave this empty<input type="text" name="hp" tabindex="-1" autocomplete="off"></label></div>
     <div class="field"><label>What do you need? <span class="req">*</span></label>
       <select name="requestType" id="requestType" required>
         <option value="Free Damp Inspection">Free Damp Inspection &mdash; no cost, no obligation</option>
@@ -219,6 +220,7 @@ footer.site a:hover{color:#fff}
     <div class="field"><label>Additional Details</label><textarea name="details" placeholder="Tell us what you're seeing and where..."></textarea></div>
     <button type="submit" class="btn btn-wide" id="bookSubmit">Submit Request &rarr;</button>
     <p class="note center">We'll confirm your appointment by phone or email within one working day.</p>
+    <p id="bookStatus" class="note center" role="status" aria-live="polite" style="font-weight:600"></p>
   </form>
 </div></div>
 <script>
@@ -230,13 +232,27 @@ function updateSubmitLabel(){
 reqType.addEventListener('change', updateSubmitLabel);
 updateSubmitLabel();
 
-document.getElementById('bookForm').addEventListener('submit', function(e){
+document.getElementById('bookForm').addEventListener('submit', async function(e){
   e.preventDefault();
-  const d = new FormData(this);
-  const type = d.get('requestType');
-  const body = `Request Type: ${type}%0D%0A%0D%0AName: ${d.get('name')}%0D%0APhone: ${d.get('phone')}%0D%0AEmail: ${d.get('email')}%0D%0AAddress: ${d.get('address')}%0D%0AIssue: ${d.get('issue')}%0D%0APreferred Date: ${d.get('date')}%0D%0ADetails: ${d.get('details')}`;
-  const subject = (type.startsWith('Free') ? 'FREE INSPECTION Request' : 'PAID SURVEY Request') + ' — ' + d.get('name');
-  window.location.href = 'mailto:info@northeastdampproofers.co.uk?subject=' + encodeURIComponent(subject) + '&body=' + body;
+  const form = this, status = document.getElementById('bookStatus');
+  const d = new FormData(form);
+  const payload = {
+    kind: 'booking', requestType: d.get('requestType'), name: d.get('name'), phone: d.get('phone'),
+    email: d.get('email'), address: d.get('address'), issue: d.get('issue'), date: d.get('date'),
+    details: d.get('details'), hp: d.get('hp')
+  };
+  submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; status.style.color = ''; status.textContent = '';
+  try {
+    const r = await fetch('/api/enquiry', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    if (!r.ok) throw new Error('send failed');
+    form.reset(); updateSubmitLabel();
+    status.style.color = '#1B7F3B';
+    status.textContent = 'Thanks — your request has been sent. We\'ll be in touch shortly.';
+  } catch (err) {
+    status.style.color = '#B3261E';
+    status.textContent = 'Sorry, that didn\'t send. Please call 07446 522034 or email info@northeastdampproofers.co.uk and we\'ll pick it up directly.';
+    updateSubmitLabel();
+  } finally { submitBtn.disabled = false; }
 });
 </script>
 
