@@ -8,11 +8,12 @@ Opening hours: Monday to Friday 8am–5pm, Saturday 8am–12pm
 Website: https://northeastdampproofers.co.uk/
 
 ## Services
-- [Damp surveys and written reports](https://northeastdampproofers.co.uk/services.html): moisture readings, diagnosis and a written report
-- [Rising damp treatment](https://northeastdampproofers.co.uk/services.html): diagnosis, damp-proof course and re-plastering
-- [Penetrating damp](https://northeastdampproofers.co.uk/services.html): finding and fixing water ingress
-- [Condensation and mould advice](https://northeastdampproofers.co.uk/services.html): ventilation and humidity solutions
-- [Basement and cellar waterproofing](https://northeastdampproofers.co.uk/services.html): tanking and membrane systems
+- [All services and "Which service do I need?" guide](https://northeastdampproofers.co.uk/services.html): symptoms mapped to likely causes, plus FAQs. Free damp inspection; written damp survey report from £150
+- [Damp surveys and written reports](https://northeastdampproofers.co.uk/services.html#damp-survey-report): moisture readings, diagnosis and a written report
+- [Rising damp treatment](https://northeastdampproofers.co.uk/services.html#rising-damp): diagnosis, damp-proof course and re-plastering
+- [Penetrating damp](https://northeastdampproofers.co.uk/services.html#penetrating-damp): finding and fixing water ingress
+- [Condensation and mould advice](https://northeastdampproofers.co.uk/services.html#condensation-mould): ventilation and humidity solutions
+- [Basement and cellar waterproofing](https://northeastdampproofers.co.uk/services.html#waterproofing): tanking and membrane systems
 
 ## Areas
 - [Damp proofing and damp surveys in Newcastle upon Tyne](https://northeastdampproofers.co.uk/damp-proofing-newcastle.html): Tyneside flats, Victorian terraces, cellars and rented homes across Newcastle
