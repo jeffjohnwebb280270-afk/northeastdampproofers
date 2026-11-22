@@ -8,5 +8,6 @@
 <script defer src="/_vercel/insights/script.js"></script>
 ```
 
-- Before opening a PR, check: `grep -L "assets/site.js" *.html` must print nothing.
+- Every page's <head> must also contain the Google tag (GA4 ID G-GQG2PLM2M7), copied from index.html, just before </head>.
+- Before opening a PR, check: `grep -L "assets/site.js" *.html` and `grep -L "G-GQG2PLM2M7" *.html` must both print nothing.
 - Phone: 07446 522034 (tel:+447446522034). Email: info@northeastdampproofers.co.uk.
