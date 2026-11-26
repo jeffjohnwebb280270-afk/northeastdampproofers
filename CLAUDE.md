@@ -11,4 +11,3 @@
 - Every page's <head> must also contain the Google tag (GA4 ID G-GQG2PLM2M7), copied from index.html, just before </head>.
 - Before opening a PR, check: `grep -L "assets/site.js" *.html` and `grep -L "G-GQG2PLM2M7" *.html` must both print nothing.
 - Phone: 07366 312425 (tel:+447366312425). Email: info@northeastdampproofers.co.uk.
-- WhatsApp button (assets/site.js) stays on 447446522034 until WhatsApp Business moves to the new number.
