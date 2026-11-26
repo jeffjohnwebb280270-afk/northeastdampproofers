@@ -5,7 +5,7 @@
     try { window.va('pageview', { route: '/lead/' + name, path: '/lead/' + name + location.pathname.replace(/\.html$/, '') }); } catch (e) {}
     try { if (window.gtag) window.gtag('event', name === 'call' ? 'phone_call_click' : name === 'whatsapp' ? 'whatsapp_click' : name === 'form' ? 'generate_lead' : 'email_click', { page_path: location.pathname }); } catch (e) {}
   }
-  var WA = 'https://wa.me/447446522034?text=' + encodeURIComponent("Hi, I've got a damp problem and I'd like a free damp check. Here's a photo:");
+  var WA = 'https://wa.me/447366312425?text=' + encodeURIComponent("Hi, I've got a damp problem and I'd like a free damp check. Here's a photo:");
 
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a');
